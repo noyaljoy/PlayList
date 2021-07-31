@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Users</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+<div th:switch="${playList}">
+    <h2 th:case="null">Play List is Empty!</h2>
+        <div th:case="*">
+            <h2 align="center">Playlists</h2>
+			<table border="1"  width="80%" style=" margin-left: auto;  margin-right: auto;">
+				<thead>
+					<tr align="center">
+						<th width="10%">Name</th>
+						<th width="30%">Songs</th>
+						<th width="10%" colspan="2"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="list : ${playList}">
+						<td width="10%" th:text="${list.name}"></td>
+						<td width="30%">
+							<table border="1" width="100%">
+								<tbody>
+									<tr th:each="s : ${list.song}">
+										<td width="30%" th:text="${s.name}"></td>
+										<td width="30%" th:text="${s.singer}"></td>
+										<td width="40%" colspan="1"><a>Delete from playlist</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+						<td  width="10%" colspan="2"><a>Add song to playlist</a>
+						<br>
+						 <a th:href="@{/deletePlayList/{id}(id=${list.id})}">Delete playlist</a></td>
+					</tr>
+					<tr>
+					<td colspan="3" align="center"> <p><a>Add New Playlist</a></p></td>
+					</tr>
+				</tbody>
+        	</table>
+    	</div>      
+</div>
+</body>
+</html>
